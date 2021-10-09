@@ -19,7 +19,6 @@
 </head>
 
 <body>
-    
     <div class="start-game" id="start-game">
         <div class="image-gif-start-game">
             <img src="./public/images/start-game-unscreen.gif" alt="" srcset="">
@@ -29,9 +28,79 @@
             <h3 class="menu-item" onClick="help()">Help</h3>
         </div>
     </div>
-    
+    <div id="coinCount" class="animated-button1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <img src="./public/images/dogIcon.png" alt="dogIcon" />
+        <h1 id="coinsTab">100</h1>
+    </div>
     <div class="gridCont" id="gridCont">
+        <div class="main-game">
+            <div class="itemSide">
+                <h1 class="text-white title-item">Thức ăn</h1>
+                <div class="progress">
+                    <div id="progressBarHung" class="progress-bar bg-danger progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div class="mt-3 mb-3">
+                    <h1 class="text-white title-item">Nước Uống</h1>
+                    <div class="progress">
+                        <div id="progressBarThir" class="progress-bar  progress-bar-striped progress-bar-animated"
+                            role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-white title-item">Cảm xúc</h1>
+                <div class="progress">
+                    <div id="progressBarHapp" class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                        role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div class="music mt-5">
+                    <button id="playpausebtn"></button>
+                    <button id="mutebtn" class="ml-2"></button>
+                </div>
+            </div>
+            <div class="itemMain">
+                <img src="./public/images/dogpoop.png" alt="poop" id="dogPoop" onClick="poopPickup(1)" />
+                <img src="./public/images/dogpee.png" alt="pee" id="dogPee" onClick="poopPickup(2)" />
+                <img src="./public/images/emptybowl.jpg" alt="food" id="dogFood" />
+                <img src="./public/images/emptybowl.jpg" alt="water" id="dogWater" />
+                <img src="./public/images/dogRug.png" alt="rug" id="dogRug" />
+                <img src="./public/images/dogHouse.png" alt="house" id="dogHouse" />
+                <img src="./public/images/dogsprite.gif" alt="dogThing" class="dogSprite dogSpriteAnimMain" id="dog" />
+                <img src="./public/images/dogsprite.gif" alt="dogThing2" class="dogSprite2 dogSpriteAnimMain2"
+                    id="dog2" />
+            </div>
+        </div>
         <div class="itemShop">
+            <div class="shopItem">
+                <div>
+                    <img src="./public/images/dopFood.jpg" alt="food" class="shopImg" />
+                    <div class="badge-coins" id="foodFree"></div>
+                </div>
+                <div class="title-shop">Thức ăn</div>
+                <button onClick="replenish(1)" class="glow-on-hover" id="addFood">Mua</button>
+            </div>
+            <div class="shopItem">
+                <div>
+                    <img src="./public/images/dogWater.jpg" alt="water" class="shopImg" />
+                    <div class="badge-coins">10</div>
+                </div>
+                <div class="title-shop">Nước uống</div>
+                <button onClick="replenish(2)" class="glow-on-hover" id="addWater">Mua</button>
+            </div>
+            <div class="shopItem">
+                <div>
+                    <img src="./public/images/dogToy.png" alt="toy" class="shopImg" />
+                    <div class="badge-coins">30</div>
+                </div>
+                <div class="title-shop">Đồ chơi</div>
+                <button onClick="replenish(3)" class="glow-on-hover" id="addToy">Mua</button>
+            </div>
             <div class="shopItem">
                 <div>
                     <img src="./public/images/dogstill.png" alt="puppy" class="shopImg" />
@@ -57,10 +126,9 @@
                 <div class="help-game mt-4">
                     <button onClick="help()" class="glow-on-hover">Help</button>
                 </div>
-            </div> 
+            </div>
         </div>
     </div>
-    
     <div class="notication" id="notication">
         <div class="icon-warnning text-center">
             <img src="./public/images/warnning-removebg.png" alt="" srcset="" style="width: 150px;">
@@ -72,7 +140,6 @@
             <button onClick="closeNotication()" class="glow-on-hover">Đóng</button>
         </div>
     </div>
-    
     <div class="game-over" id="gameOver">
         <div class="gameover">
             <p> GAME </p>
@@ -87,7 +154,6 @@
             <div class="no" id="black" onClick="blackGame()"> THOÁT</div>
         </div>
     </div>
-    
     <div class="template-help" id="template-help">
         <div class="content-help">
             <div class="font-weight-bold text-center title-content-help mb-5">CÁCH CHƠI GAME NUÔI THÚ CƯNG</div>
