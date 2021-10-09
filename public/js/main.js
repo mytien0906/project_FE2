@@ -224,7 +224,7 @@ let replenish = (type) => {
       `
     }
     else if (coins >= 10) {
-      waterBowl.src = "./public/images/dogWater.jpg";
+      waterBowl.src = "./public/images/dogwater.jpg";
       dog.className = 'dogSprite dogSpriteAnimFeed'
       coins -= 10;
       thirst += 10;
