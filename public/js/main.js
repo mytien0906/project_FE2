@@ -81,19 +81,27 @@ let time = () => {
     gameOver.style.display = "block"
     audio.pause();
   }
-
+  if (hunger <= 0) {
+    hunger = 0;
+  }
+  if (thirst <= 0) {
+    thirst = 0
+  }
+  if (happiness <= 0) {
+    happiness = 0
+  }
   else {
-    thirst -= 8;
-    hunger -= 4;
-    happiness -= 10;
-    setHungerProgress(hunger);
-    setThirstProgress(thirst);
-    setHappinessProgress(happiness);
-  }
-  if (hunger == 100 && thirst == 100 && happiness == 100) {
-    coins += 100;
-    coinTab.textContent = coins
-  }
+  thirst -= 8;
+  hunger -= 4;
+  happiness -= 10;
+  setHungerProgress(hunger);
+  setThirstProgress(thirst);
+  setHappinessProgress(happiness);
+}
+if (hunger == 100 && thirst == 100 && happiness == 100) {
+  coins += 100;
+  coinTab.textContent = coins
+}
 };
 
 let poopGen = () => {
@@ -277,7 +285,7 @@ let replenishReversal = (type) => {
 };
 
 let addPuppy = () => {
-  countaddPuppy -= 1;
+
   if (countaddPuppy == 0 || countaddPuppy < 0) {
     document.getElementById("notication").style.display = "block";
     document.getElementById("title-notication").innerHTML = `
@@ -303,6 +311,7 @@ let addPuppy = () => {
       coinTab.textContent = coins
     }
   }
+  countaddPuppy -= 1;
 }
 let configTypeButton = (type) => {
   if (type === "none") {
@@ -313,7 +322,6 @@ let configTypeButton = (type) => {
 
 }
 let addHouse = () => {
-  countaddHouse -= 1;
   if (countaddHouse == 0 || countaddHouse < 0) {
     document.getElementById("notication").style.display = "block";
     document.getElementById("title-notication").innerHTML = `
@@ -338,6 +346,7 @@ let addHouse = () => {
       coinTab.textContent = coins
     }
   }
+  countaddHouse -= 1;
 };
 let closeNotication = () => {
   document.getElementById("notication").style.display = "none";
@@ -358,20 +367,18 @@ let start = () => {
   setInterval(poopGen, 7000);
 }
 let continueGame = () => {
-  coins -= coins;
-  setTimeout(() => {
-    count = 0;
-    hunger = 100;
-    thirst = 100;
-    happiness = 100;
-    coins = 100;
-  }, 100);
+  coins = 100;
+  count = 2
+  hunger = 100;
+  thirst = 100;
+  happiness = 100;
   startGames.style.display = "none";
   coinCount.style.display = "flex"
   gridCont.style.display = "block";
   time();
   poopGen();
-  initAudioPlayer();
+  // initAudioPlayer();
+  audio.play();
   setInterval(time, 10000);
   setInterval(poopGen, 7000);
   gameOver.style.display = "none"
@@ -403,12 +410,12 @@ let blackGame = () => {
     }
   }
 }
-let initAudioPlayer=()=>{
+let initAudioPlayer = () => {
   audio = new Audio();
   var pause = audio.pause()
   if (pause) {
     audio.play();
-  } else {  
+  } else {
     audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
     audio.loop = true;
     audio.oncanplaythrough = (event) => {
