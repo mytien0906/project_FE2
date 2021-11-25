@@ -19,33 +19,16 @@ let coinCount = document.getElementById('coinCount');
 let gridCont = document.getElementById('gridCont');
 document.getElementById("notication").style.display = "none";
 let gameOver = document.getElementById('gameOver');
-var audio, audioStart, playbtn, mutebtn, seek_bar;
 document.getElementById("template-help").style.display = "none";
 let foodFree = document.getElementById("foodFree");
 countaddPuppy = 1;
 countaddHouse = 1;
 window.onload = function () {
-  audioStart = new Audio();
   gameOver.style.display = "none"
   foodFree.innerHTML = `+ ${count} Free`;
   gridCont.style.display = "none";
   coinCount.style.display = "none";
   startGames.style.display = "block";
-  audioStart.src = "./public/music/start-game.mp3";
-  audioStart.loop = true;
-  audioStart.oncanplaythrough = (event) => {
-    var playedPromise = audioStart.play();
-    if (playedPromise) {
-      playedPromise.catch((e) => {
-        if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-          audioStart.pause();
-          audioStart.load()
-        }
-      }).then(() => {
-        console.log("playing sound !!!");
-      });
-    }
-  }
 }
 let randomNumber = (min, max) => {
   return Math.random() * (max - min) + min;
@@ -79,7 +62,6 @@ let time = () => {
   if (hunger <= 0 || thirst <= 0 || happiness <= 0) {
     configTypeButton("none");
     gameOver.style.display = "block"
-    audio.pause();
   }
   if (hunger <= 0) {
     hunger = 0;
@@ -356,13 +338,11 @@ let help = () => {
   document.getElementById("template-help").style.display = "block"
 }
 let start = () => {
-  audioStart.pause();
   startGames.style.display = "none";
   coinCount.style.display = "flex"
   gridCont.style.display = "block";
   time();
   poopGen();
-  initAudioPlayer();
   setInterval(time, 10000);
   setInterval(poopGen, 7000);
 }
@@ -377,8 +357,6 @@ let continueGame = () => {
   gridCont.style.display = "block";
   time();
   poopGen();
-  // initAudioPlayer();
-  audio.play();
   setInterval(time, 10000);
   setInterval(poopGen, 7000);
   gameOver.style.display = "none"
@@ -393,67 +371,8 @@ let blackGame = () => {
   thirst = 100;
   happiness = 100;
   coins = 100;
-  audio.pause();
-  audioStart.src = "./public/music/start-game.mp3";
-  audioStart.loop = true;
-  audioStart.oncanplaythrough = (event) => {
-    var playedPromise = audioStart.play();
-    if (playedPromise) {
-      playedPromise.catch((e) => {
-        if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-          audioStart.pause();
-          audioStart.load()
-        }
-      }).then(() => {
-        console.log("playing sound !!!");
-      });
-    }
-  }
 }
-let initAudioPlayer = () => {
-  audio = new Audio();
-  var pause = audio.pause()
-  if (pause) {
-    audio.play();
-  } else {
-    audio.src = "https://www.soundjay.com/free-music/midnight-ride-01a.mp3";
-    audio.loop = true;
-    audio.oncanplaythrough = (event) => {
-      var playedPromise = audio.play();
-      if (playedPromise) {
-        playedPromise.catch((e) => {
-          if (e.name === 'NotAllowedError' || e.name === 'NotSupportedError') {
-          }
-        }).then(() => {
-          console.log("playing sound !!!");
-        });
-      }
-    }
-  }
-  // Set object references
-  playbtn = document.getElementById("playpausebtn");
-  mutebtn = document.getElementById("mutebtn");
-  playbtn.addEventListener("click", playPause);
-  mutebtn.addEventListener("click", mute);
-  function playPause() {
-    if (audio.paused) {
-      audio.play();
-      playbtn.style.background = "url(https://image.flaticon.com/icons/svg/189/189889.svg) no-repeat";
-    } else {
-      audio.pause();
-      playbtn.style.background = "url(https://image.flaticon.com/icons/svg/148/148744.svg) no-repeat";
-    }
-  }
-  function mute() {
-    if (audio.muted) {
-      audio.muted = false;
-      mutebtn.style.background = "url(https://image.flaticon.com/icons/svg/204/204287.svg) no-repeat";
-    } else {
-      audio.muted = true;
-      mutebtn.style.background = "url(https://image.flaticon.com/icons/svg/148/148757.svg) no-repeat";
-    }
-  }
-}
+
 let closeTempalteHelp = () => {
   document.getElementById("template-help").style.display = "none";
   // document.getElementById("template-help").style.animation
